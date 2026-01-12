@@ -52,7 +52,7 @@ public class StudentController {
         return(new Student(id,firstName,lastName));
     }
 
-    //Spring boot rest API that handles HTTP POST Request
+    //Spring boot rest API that handles HTTP POST Request  - creating existing resource
     // @PostMapping @RequestBody
     @PostMapping("students/create")
     @ResponseStatus(HttpStatus.CREATED)
@@ -65,4 +65,25 @@ public class StudentController {
         return student;
     }
 
+    //Spring boot rest API that handles HTTP PUT Request - updating existing resource
+    @PutMapping("students/{id}/update")
+    public Student updateStudent(@PathVariable("id") int studentId,@RequestBody Student student){
+
+
+        student.setId(studentId);
+        System.out.println(student.getFirstName());
+        System.out.println(student.getLastName());
+
+        return student;
+
+    }
+
+
+    //Spring boot rest API that handles delete Request
+    @DeleteMapping("students/{id}/delete")
+    public String deleteStudent(@PathVariable("id") int studentId){
+        System.out.println(studentId);
+
+        return "Student deleted successfully!";
+    }
 }
