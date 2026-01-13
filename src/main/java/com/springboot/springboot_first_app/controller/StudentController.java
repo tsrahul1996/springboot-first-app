@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("students")
 public class StudentController {
 
     //http://localhost:8080/student
@@ -19,7 +20,7 @@ public class StudentController {
 
         return student;
     }
-    @GetMapping("students")
+    @GetMapping("")
     public List<Student> getStudents(){
 
         List<Student> students = new ArrayList<>();
@@ -34,7 +35,7 @@ public class StudentController {
 
     //Spring boot rest API with path variable
     // {id} - URI template variable
-    @GetMapping("students/{id}/{first-name}/{last-name}")
+    @GetMapping("{id}/{first-name}/{last-name}")
     public Student studentPathVariable(@PathVariable("id") int studentId,
                                        @PathVariable("first-name") String firstName,
                                        @PathVariable("last-name") String lastName){
@@ -45,7 +46,7 @@ public class StudentController {
 
     //Spring boot rest API with Request Param
     //http://localhost:8080/students/query?id=1&firstName=Rahul&lastName=Sivan
-    @GetMapping("students/query")
+    @GetMapping("query")
     public Student studentRequestVariable(@RequestParam int id,
                                           @RequestParam String firstName,
                                           @RequestParam String lastName){
@@ -54,7 +55,7 @@ public class StudentController {
 
     //Spring boot rest API that handles HTTP POST Request  - creating existing resource
     // @PostMapping @RequestBody
-    @PostMapping("students/create")
+    @PostMapping("create")
     @ResponseStatus(HttpStatus.CREATED)
     public Student createStudent(@RequestBody Student student){
 
@@ -66,7 +67,7 @@ public class StudentController {
     }
 
     //Spring boot rest API that handles HTTP PUT Request - updating existing resource
-    @PutMapping("students/{id}/update")
+    @PutMapping("{id}/update")
     public Student updateStudent(@PathVariable("id") int studentId,@RequestBody Student student){
 
 
@@ -80,7 +81,7 @@ public class StudentController {
 
 
     //Spring boot rest API that handles delete Request
-    @DeleteMapping("students/{id}/delete")
+    @DeleteMapping("{id}/delete")
     public String deleteStudent(@PathVariable("id") int studentId){
         System.out.println(studentId);
 
